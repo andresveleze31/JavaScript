@@ -74,6 +74,8 @@ class Citas {
         }
     })
 
+    modo = "editar";
+
     interfaz.mostrarCitas(this.citas);
 
   }
