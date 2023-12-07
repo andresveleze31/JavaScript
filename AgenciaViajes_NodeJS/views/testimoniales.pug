@@ -2,21 +2,38 @@ extends ./layouts/index
 
 block contenido 
    main(class="container mt-5")
+        h1(class="text-center mt-5")  #{nombrePagina}
+            
+        blockquote(class="text-center") Lee sobre nuestro clientes y sus experiencias 
+        div(class="row testimoniales")
+            each testimonio in testimonios
+                div(class="col-md-6 col-lg-4 mb-4")
+                    div(class="card")
+                        div(class="card-body")
+                            blockquote(class="blockquote")
+                            p(class="mb-0")
+                                | #{testimonio.mensaje}
+                            footer(class="blockquote-footer")
+                                | #{testimonio.nombre}
+
         div(class="row")
-            h1(class="text-center mt-5")  #{nombrePagina}
-            div(class="row")
+            div(class="col-md-12")
                 h2(class="d-block w-100 text-center") Agrega un Testimonial
 
-                div(class="row justify-content-center col")
-                    div(class="col-md-8") 
-                        form(action="/testimoniales" method="POST")
-                            div(class="form-group")
-                                label(for="nombre") Nombre 
-                                input(class="form-control" id="nombre" type="text" placeholder="Tu Nombre" name="nombre")
-                            div(class="form-group")
-                                label(for="correo") Correo 
-                                input(class="form-control" id="correo" type="email" placeholder="Tu Correo" name="correo")
-                            div(class="form-group")
-                                label(for="mensaje") Mensaje 
-                                textarea(id="mensaje" class="form-control" name="mensaje", cols="30", rows="10")
-                            input(type="submit" class="btn btn-succes btn-block") 
+                if(errores)
+                    each error in errores 
+                        div(class="alert col alert-danger text-center") #{error.mensaje}
+
+            div(class="row justify-content-center col")
+                div(class="col-md-8") 
+                    form(action="/testimoniales" method="POST")
+                        div(class="form-group")
+                            label(for="nombre") Nombre 
+                            input(class="form-control" id="nombre" type="text" placeholder="Tu Nombre" name="nombre")
+                        div(class="form-group")
+                            label(for="correo") Correo 
+                            input(class="form-control" id="correo" type="email" placeholder="Tu Correo" name="correo")
+                        div(class="form-group")
+                            label(for="mensaje") Mensaje 
+                            textarea(id="mensaje" class="form-control" name="mensaje", cols="30", rows="10")
+                        input(type="submit" class="btn btn-success btn-block") 
